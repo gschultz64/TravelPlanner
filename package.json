@@ -1,5 +1,5 @@
 {
-  "name": "express-authentication",
+  "name": "project2",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -36,5 +36,18 @@
     "pg": "^6.4.2",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.38.0"
-  }
+  },
+  "description": "Express app using Passport + flash messages + custom middleware",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gschultz64/project2.git"
+  },
+  "author": "Genevieve Schultz",
+  "bugs": {
+    "url": "https://github.com/gschultz64/project2/issues"
+  },
+  "homepage": "https://github.com/gschultz64/project2#readme"
 }
