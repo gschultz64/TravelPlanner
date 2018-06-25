@@ -1,30 +1,22 @@
-# Express Authentication
+## project2 - "Travel Website"
 
-Express authentication template using Passport + flash messages + custom middleware
+# Wireframes
+# White Board Photos
 
-## Getting Started
+# Adobe XD Files
 
-#### Scaffold w/tests (see `master` branch)
+# Day One
+Researched and studied using the Google Maps API(s) - https://classroom.udacity.com/courses/ud864
+Finalized structure of database models/tables
+Created production, development and test databases, models, migrated tables to my project.
+Have basic google maps functionality on my app - next steps will be to finish planning out layout and structure of app, store data from the api in my production database.
 
-* Run `npm install` to install dependencies
-  * Use `npm run lint:js` to lint your JS
-  * Use `npm run lint:css` to lint your CSS
-  * Use `npm test` to run tests
-* Setup the databases
-  * Change the database names in `config/config.json` to reflect your project
-  * Run `createdb project_name_development` to create the development database
-  * Run `createdb project_name_test` to create the test database
+# Day Two
 
-#### Finished version (see `brian-finished` branch)
+# Day Three
 
-* Run `npm install` to install dependencies
-  * Use `npm run lint:js` to lint your JS
-  * Use `npm run lint:css` to lint your CSS
-  * Use `npm test` to run tests
-* Setup the databases
-  * Run `createdb express_auth_development` to create the development database
-  * Run `createdb express_auth_test` to create the test database
-  * Run `sequelize db:migrate` to run migrations
+# Day Four
 
+# Day Five
 
-# project2
+# Weekend (Days Six/Seven)
