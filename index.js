@@ -48,6 +48,10 @@ app.get('/profile', isLoggedIn, function (req, res) {
   res.render('profile');
 });
 
+app.get('/maps', function(req, res) {
+  res.render('maps/index');
+})
+
 app.use('/auth', require('./controllers/auth'));
 
 var server = app.listen(process.env.PORT || 3000);

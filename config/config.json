@@ -2,21 +2,21 @@
   "development": {
     "username": "gensc",
     "password": 123,
-    "database": "auth_development",
+    "database": "Travel_development",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "gensc",
     "password": 123,
-    "database": "auth_test",
+    "database": "Travel_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
     "username": "gensc",
     "password": 123,
-    "database": "auth_production",
+    "database": "Travel",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
