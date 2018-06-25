@@ -6,6 +6,8 @@ var session = require('express-session');
 var passport = require('./config/passportConfig');
 var isLoggedIn = require('./middleware/isLoggedIn');
 var flash = require('connect-flash');
+var geocoder = require('geocoder');
+var db = require('./models');
 
 var app = express();
 
@@ -14,6 +16,7 @@ app.set('view engine', 'ejs');
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(ejsLayouts);
+app.use(express.static(__dirname + '/public'));
 
 // This needs to come before you app.use passport
 app.use(session({
