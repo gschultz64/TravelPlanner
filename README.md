@@ -1,9 +1,9 @@
-## project2 - "Travel Website"
+# project2 - "Travel Website"
 
-# Wireframes
-# White Board Photos
+## Wireframes
+## White Board Photos
 
-# Adobe XD Files
+## Adobe XD Files
 
 # Day One
 Researched and studied using the Google Maps API(s) - https://classroom.udacity.com/courses/ud864
