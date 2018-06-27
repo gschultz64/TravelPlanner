@@ -16,9 +16,12 @@ Planned layout of web site pages
 Completed wire frames and prototyping in Adobe XD - https://xd.adobe.com/view/09f60442-19ed-4bcd-69bc-4350ce2dbeaf-7fc7/
 
 # Day Three
+TODO: Work on routes, write model associations
 
 # Day Four
+TODO: Style the site more
 
 # Day Five
+TODO: Finish stuff!
 
 # Weekend (Days Six/Seven)
