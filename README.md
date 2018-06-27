@@ -1,6 +1,6 @@
 # project2 - "Travel Website"
 
-## Wireframes
+## Wire frames
 ## White Board Photos
 
 ## Adobe XD Files
@@ -12,6 +12,8 @@ Created production, development and test databases, models, migrated tables to m
 Have basic google maps functionality on my app - next steps will be to finish planning out layout and structure of app, store data from the api in my production database.
 
 # Day Two
+Planned layout of web site pages
+Completed wire frames and prototyping in Adobe XD - https://xd.adobe.com/view/09f60442-19ed-4bcd-69bc-4350ce2dbeaf-7fc7/
 
 # Day Three
 
