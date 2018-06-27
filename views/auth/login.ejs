@@ -1,3 +1,5 @@
+<% include ../partials/header.ejs %>
+
 <form action="/auth/login" method="POST">
   <div class="form-group">
     <label for="authEmail">Email</label>
@@ -9,5 +11,7 @@
     <input id="authPassword" class="form-control" type="password" name="password">
   </div>
 
-  <input class="btn btn-primary" type="submit">
+  <button type="submit" class="waves-effect btn purple"><i class="material-icons right">send</i>log in</button>
 </form>
+
+<% include ../partials/footer.ejs %>

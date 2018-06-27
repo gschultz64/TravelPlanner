@@ -1,6 +1,5 @@
 require('dotenv').config();
 var express = require('express');
-var ejsLayouts = require('express-ejs-layouts');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('./config/passportConfig');
@@ -15,7 +14,6 @@ app.set('view engine', 'ejs');
 
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(ejsLayouts);
 app.use(express.static(__dirname + '/public'));
 
 // This needs to come before you app.use passport
@@ -44,15 +42,13 @@ app.get('/', function (req, res) {
   res.render('index');
 });
 
-app.get('/profile', isLoggedIn, function (req, res) {
-  res.render('profile');
-});
-
 app.get('/maps', function(req, res) {
   res.render('maps/index');
 })
 
 app.use('/auth', require('./controllers/auth'));
+app.use('/trips', require('./controllers/trips'));
+app.use('/profile', require('./controllers/profile'));
 
 var server = app.listen(process.env.PORT || 3000);
 
