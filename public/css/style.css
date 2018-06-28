@@ -10,7 +10,9 @@ body {
 
 .container {
   width: 80%;
+  margin-top: 5%;
 }
+
 .home {
   background-color: #D0D7D9;
   /* border: 2px solid grey; */
@@ -52,6 +54,10 @@ body {
 
 p {
   margin-bottom: 0;
+}
+
+.end-date {
+  margin-left: 1em;
 }
 
 /* google maps styling */

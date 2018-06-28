@@ -15,6 +15,15 @@ router.get('/', isLoggedIn, function (req, res) {
   });
 });
 
+// GET - /trips/new - display form to create a new trip
+router.get('/new', isLoggedIn, function (req, res) {
+  db.user.findAll().then(function (users) {
+    res.render('trips/new', { users: users });
+  }).catch(function (error) {
+    res.status(400).render('404');
+  });
+});
+
 // GET - /trips/:name - display a specific trip
 router.get('/:name', function(req, res) {
   db.trip.find({
@@ -28,15 +37,6 @@ router.get('/:name', function(req, res) {
   });
 });
 
-
-// GET - /trips/new - display form to create a new trip
-router.get('/new', isLoggedIn, function(req, res) {
-  db.user.findAll().then(function(users) {
-    res.render('trips/new', {users: users});
-  }).catch(function(error) {
-    res.status(400).render('404');
-  });
-});
 
 // POST - /trips - add a new trip
 

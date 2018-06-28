@@ -1,0 +1,21 @@
+<% include ../partials/header.ejs %>
+
+ <form action="/auth/signup" method="POST">
+
+  <div class="input-field">
+    <label for="tripName">Name</label>
+    <input id="tripName" class="form-control" type="text" name="name">
+  </div>
+  <br/>
+  <div>
+    <label for="startDate" class="start-date">Start Date</label>
+    <input id="startDate" class="datepicker" type="datepicker" name="startDate">
+    <label for="endDate" class="end-date">End Date</label>
+    <input id="endDate" class="datepicker" type="datepicker" name="endDate">
+  </div>
+  <br/>
+  <button class="btn purple" type="submit"><i class="material-icons right"></i>Add Trip</button>
+</form>
+
+
+<% include ../partials/footer.ejs %>
