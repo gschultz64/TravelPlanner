@@ -27,7 +27,7 @@ router.post('/signup', function (req, res) {
     if (created) {
       // No record was found, so we created one
       passport.authenticate('local', {
-        successRedirect: '/',
+        successRedirect: '/profile',
         successFlash: 'Account created and logged in!'
       })(req, res); // IIFE - Immediately-Invoked Function Expression
     } else {
@@ -44,7 +44,7 @@ router.post('/signup', function (req, res) {
 
 // POST /auth/login - the route that processes the login form
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
+  successRedirect: '/profile',
   failureRedirect: '/auth/login',
   successFlash: 'You have logged in!',
   failureFlash: 'Invalid username and/or password!'

@@ -1,22 +1,61 @@
-<% include ../partials/header.ejs %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Travel Planner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="/" class="brand-logo">Travel Planner</a>
+          <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li class="active"><a href="/auth/signup">Sign Up</a></li>           
+            <li><a href="/auth/login">Log In</a></li>
+          </ul>
+        </div>
+      </nav>
+      <ul id="mobile-menu" class="sidenav">
+        <li class="active"><a href="/auth/signup">Sign Up</a></li>           
+        <li><a href="/auth/login">Log In</a></li>
+      </ul>
+    </header>
+    <%- JSON.stringify(currentUser) %>
+    <% include ../partials/alerts %>
+    <div class="container">
 
-<form action="/auth/signup" method="POST">
+      <form action="/auth/signup" method="POST">
 
-  <div class="form-group">
-    <label for="authName">Name</label>
-    <input id="authName" class="form-control" type="text" name="name">
-  </div>
-  
-  <div class="form-group">
-    <label for="authEmail">Email</label>
-    <input id="authEmail" class="form-control" type="email" name="email">
-  </div>
+        <div class="form-group">
+          <label for="authName">Name</label>
+          <input id="authName" class="form-control" type="text" name="name">
+        </div>
+        
+        <div class="form-group">
+          <label for="authEmail">Email</label>
+          <input id="authEmail" class="form-control" type="email" name="email">
+        </div>
 
-  <div class="form-group">
-    <label for="authPassword">Password</label>
-    <input id="authPassword" class="form-control" type="password" name="password">
-  </div>
+        <div class="form-group">
+          <label for="authPassword">Password</label>
+          <input id="authPassword" class="form-control" type="password" name="password">
+        </div>
 
-  <button class="btn purple" type="submit"><i class="material-icons right">send</i>Sign up</button>
-</form>
-<% include ../partials/footer.ejs %>
+        <button class="btn purple" type="submit"><i class="material-icons right">send</i>Sign up</button>
+      </form>
+
+    </div>
+
+    <footer>
+
+    </footer>
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <script src="/js/script.js"></script>
+  </body>
+</html>

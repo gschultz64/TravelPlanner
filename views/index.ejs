@@ -1,11 +1,44 @@
-<% include ./partials/header.ejs %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Travel Site</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="/" class="brand-logo">Travel Planner</a>
+          <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/auth/signup">Sign Up</a></li>           
+            <li><a href="/auth/login">Log In</a></li>
+          </ul>
+        </div>
+      </nav>
+      <ul id="mobile-menu" class="sidenav">
+        <li><a href="/auth/signup">Sign Up</a></li>           
+        <li><a href="/auth/login">Log In</a></li>
+      </ul>
+    </header>
+    <%- JSON.stringify(currentUser) %>
+    <% include ./partials/alerts %>
+    <div class="container">
+      <div class="center home">
+        <a class="btn purple" href="/auth/signup">Sign Up</a>
+        <a class="btn purple" href="/auth/login">Log In</a>
+      </div>
+    </div>
 
-<h2>Travel Plan</h2>
+    <footer>
 
-<a href="/auth/signup">Signup</a>
-<a href="/auth/login">Login</a>
-<a href="/auth/logout">Logout</a>
-<a href="/profile">Profile</a>
-
-  
-<% include ./partials/footer.ejs %>
+    </footer>
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <script src="/js/script.js"></script>
+  </body>
+</html>
