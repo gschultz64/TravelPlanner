@@ -16,12 +16,13 @@ Planned layout of web site pages
 Completed wire frames and prototyping in Adobe XD - https://xd.adobe.com/view/09f60442-19ed-4bcd-69bc-4350ce2dbeaf-7fc7/
 
 # Day Three
-TODO: Work on routes, write model associations
+Planned site structure a bit more, which helped me realize I could combine some pages from my wire frames. Worked on some routes, wrote model associations, added more styling to site layout. Decided not to use express-ejs-layouts, doing header and footer in the partials folder so I can be more flexible with the site layout.
 
 # Day Four
-TODO: Style the site more
+TODO: Finish routes, work on storing api data
 
 # Day Five
-TODO: Finish stuff!
+TODO: Finish stuff! Stretch features?
 
 # Weekend (Days Six/Seven)
+TODO: Style the site more, finish whatever is left, work on stretch features

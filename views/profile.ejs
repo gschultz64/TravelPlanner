@@ -3,7 +3,7 @@
 <h1 class="center">User Dashboard</h1>
 <div class="row">
   <div class="col s12 m4 center">
-    <h2>Saved Trips</h2>
+    <a href="/trips"><h2>Saved Trips</h2></a>
     <ul>
       <% trips.forEach(function(trip) { %>
         <li>
@@ -19,8 +19,8 @@
     <a href="#"><p>Profile Details</p></a>
   </div>
   <div class="col s12 m4 center">
-    <h2>New Trip</h2>
-    <form>
+    <a href="/trips/new"><h2>New Trip</h2></a>
+    <form action="/trips" method="GET">
       <div class="input-field">
         <input type="search" id="search" required />
         <label class="label-icon" for="search"></label><i class="material-icons">search</i>
@@ -28,6 +28,15 @@
     </form>
     <a href="/trips/new"><p>Create New Trip</p></a>
   </div>
+</div>
+<div class="row">
+  <div class="col s12 center">
+    <h3>Calendar</h3>
+    <div class="calendar">
+      <i class="large material-icons">date_range</i>
+    </div>
+  </div>
+</div>
 
 
 
