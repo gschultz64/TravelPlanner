@@ -28,9 +28,16 @@
     <%- JSON.stringify(currentUser) %>
     <% include ./partials/alerts %>
     <div class="container">
-      <div class="center home">
-        <a class="btn purple" href="/auth/signup">Sign Up</a>
-        <a class="btn purple" href="/auth/login">Log In</a>
+      <div class="row">
+        <div class="center home">
+          <a class="btn purple" href="/auth/signup">Sign Up</a>
+          <a class="btn purple" href="/auth/login">Log In</a>
+        </div>
+      </div>
+      <div class="row photos">
+        <img class="responsive-img col s12 m4" src="http://placekitten.com/200/300"/>
+        <img class="responsive-img col s12 m4" src="http://placekitten.com/g/200/300"/>
+        <img class="responsive-img col s12 m4" src="http://placekitten.com/200/300"/>
       </div>
     </div>
 
