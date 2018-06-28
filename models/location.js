@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   location.associate = function(models) {
     // associations can be defined here
+    models.location.belongsToMany(models.trip, {through: "locationsTrips"});
   };
   return location;
 };
