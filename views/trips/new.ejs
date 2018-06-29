@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col s12 m5 form">
-        <form action="/trips" method="POST">
+        <form action="/trips/<%= trip.name%>" method="POST">
           <div class="input-field">
             <label for="tripName">Name</label>
             <input id="tripName" class="form-control" type="text" name="name">
@@ -28,16 +28,11 @@
             <input id="zoom-to-area" class="btn" type="button" value="Zoom"/>
           </div>
           <hr>
-          <span class="text"> Draw a shape to search!</span>
-          <input id="toggle-drawing" class="btn" type="button" value="Drawing Tools"/>
-          <hr>
           <div>
             <span class="text">Search for nearby places</span>
             <input id="places-search" type="text" placeholder="Ex: Eiffel Tower"/>
             <input id="go-places" class="btn" type="button" value="Go"/>
           </div>
-           <input id="show-listings" class="btn" type="button" value="Show Listings"/>
-          <input id="hide-listings" class="btn" type="button" value="Hide Listings"/> 
         </div>
       </div>
     </div>
@@ -50,8 +45,6 @@
       var map;
       var markers = [];
       // var locations = [];
-      // This global polygon variable is to ensure only ONE polygon is rendered.
-      var polygon = null;
       var placeMarkers = [];
 
       function initMap() {
@@ -61,6 +54,7 @@
           zoom: 8,
           mapTypeControl: false
         });
+
         // Autocomplete search in time entry box
         // var timeAutocomplete = new google.maps.places.Autocomplete(
         //   document.getElementById('search-within-time-text'));
@@ -75,98 +69,17 @@
         // Bias the search box to within the bounds of the map
         searchBox.setBounds(map.getBounds());
 
-
         var largeInfoWindow = new google.maps.InfoWindow();
 
-        // Initialize the drawing manager.
-          var drawingManager = new google.maps.drawing.DrawingManager({
-            drawingMode: google.maps.drawing.OverlayType.POLYGON,
-            drawingControl: true,
-            drawingControlOptions: {
-              position: google.maps.ControlPosition.TOP_LEFT,
-              drawingModes: [
-                google.maps.drawing.OverlayType.POLYGON
-              ]
-            }
-          });
-
-        // Style the markers a bit. This will be our listing marker icon.
-        var defaultIcon = makeMarkerIcon('663399');
-        // Create a "highlighted location" marker color for when the user
-        // mouses over the marker.
-        var highlightedIcon = makeMarkerIcon('00e2e2');
-
-        // for (var i = 0; i < locations.length; i++) {
-        //   // Get the position from the location array.
-        //   var position = locations[i].location;
-        //   var title = locations[i].title;
-        //   // Create a marker per location, and put into markers array.
-        //   var marker = new google.maps.Marker({
-        //     position: position,
-        //     title: title,
-        //     animation: google.maps.Animation.DROP,
-        //     icon: defaultIcon,
-        //     id: i
-        //   });
-        //   // Push the marker to our array of markers.
-        //   markers.push(marker);
-        //   // Create an onclick event to open an infowindow at each marker.
-        //   marker.addListener('click', function() {
-        //     populateInfoWindow(this, largeInfowindow);
-        //   });
-        //   // Two event listeners - one for mouseover, one for mouseout,
-        //   // to change the colors back and forth.
-        //   marker.addListener('mouseover', function() {
-        //     this.setIcon(highlightedIcon);
-        //   });
-        //   marker.addListener('mouseout', function() {
-        //     this.setIcon(defaultIcon);
-        //   });
-        // }
-
-        // Show Listings and Hide Listings buttons
-        document.getElementById('show-listings').addEventListener('click', showListings);
-        document.getElementById('hide-listings').addEventListener('click', function(){
-          hideMarkers(markers);
-        }); 
-        document.getElementById('toggle-drawing').addEventListener('click', function() {
-          toggleDrawing(drawingManager);
-        });
+        // Zoom to Area button
         document.getElementById('zoom-to-area').addEventListener('click', function() {
           zoomToArea();
-        });
-
-        // Listen for the event fired when the user selects a prediction from the 
-        // picklist and retrieve more details for that place.
-        searchBox.addListener('places_changed', function() {
-          searchBoxPlaces(this);
         });
 
         // Listen for the event fired when the user selects a prediction and clicks "Go"
         // more details for that place.
         document.getElementById('go-places').addEventListener('click', textSearchPlaces);
 
-        // Add an event listener so that the polygon is captured,  call the
-        // searchWithinPolygon function. This will show the markers in the polygon,
-        // and hide any outside of it.
-        drawingManager.addListener('overlaycomplete', function(event) {
-          // First, check if there is an existing polygon.
-          // If there is, get rid of it and remove the markers
-          if (polygon) {
-            polygon.setMap(null);
-            hideListings(markers);
-          }
-          // Switching the drawing mode to the HAND (i.e., no longer drawing).
-          drawingManager.setDrawingMode(null);
-          // Creating a new editable polygon from the overlay.
-          polygon = event.overlay;
-          polygon.setEditable(true);
-          // Searching within the polygon.
-          searchWithinPolygon();
-          // Make sure the search is re-done if the poly is changed.
-          polygon.getPath().addListener('set_at', searchWithinPolygon);
-          polygon.getPath().addListener('insert_at', searchWithinPolygon);
-        });
       }
 
       // This function populates the infowindow when the marker is clicked. We'll only allow
@@ -232,45 +145,6 @@
         };
       };
 
-      // This function takes in a COLOR, and then creates a new marker
-      // icon of that color. The icon will be 21 px wide by 34 high, have an origin
-      // of 0, 0 and be anchored at 10, 34).
-      function makeMarkerIcon(markerColor) {
-        var markerImage = new google.maps.MarkerImage(
-          'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
-          '|40|_|%E2%80%A2',
-          new google.maps.Size(21, 34),
-          new google.maps.Point(0, 0),
-          new google.maps.Point(10, 34),
-          new google.maps.Size(21,34));
-        return markerImage;
-      };
-
-      // This shows and hides (respectively) the drawing options.
-      function toggleDrawing(drawingManager) {
-        if (drawingManager.map) {
-          drawingManager.setMap(null);
-          // In case the user drew anything, get rid of the polygon
-          if (polygon !== null) {
-            polygon.setMap(null);
-          }
-        } else {
-          drawingManager.setMap(map);
-        };
-      };
-
-      // This function hides all markers outside the polygon,
-      // and shows only the ones within it. This is so that the
-      // user can specify an exact area of search.
-      function searchWithinPolygon() {
-        for (var i = 0; i < markers.length; i++) {
-          if (google.maps.geometry.poly.containsLocation(markers[i].position, polygon)) {
-            markers[i].setMap(map);
-          } else {
-            markers[i].setMap(null);
-          };
-        };
-      };
       // This function takes the input value in the find nearby area text input
       // locates it, and then zooms into that area. This is so that the user can
       // show all listings, then decide to focus on one area of the map.
@@ -297,16 +171,6 @@
                   ' specific place.');
               };
             });
-        };
-      };
-
-      function searchBoxPlaces(searchBox) {
-        hideMarkers(placeMarkers);
-        var places = searchBox.getPlaces;
-        // For each place, get the icon, name and location.
-        createMarkersForPlaces(places);
-        if (places.length == 0) {
-          console.log('We did not find any places matching that search!');
         };
       };
 
@@ -406,7 +270,7 @@
             }
             // Form and button to add location data to locations table
             // Need location name, address, place_id, lat, lng
-            innerHTML += '<br/><form action="/" method="POST"><input class="btn purple" type="submit" value="Add to Trip"/>'
+            innerHTML += '<br/><form action="/trips" method="POST"><input class="btn purple" type="submit" value="Add to Trip"/></form>'
             innerHTML += '</div>';
             infowindow.setContent(innerHTML);
             infowindow.open(map, marker);
@@ -418,11 +282,10 @@
         });
       }
 
-
     </script>
   </div>
 </main>
 <script async defer src=
-"https://maps.googleapis.com/maps/api/js?key=<%= process.env.KEY %>&libraries=places,geometry,drawing&v=3&callback=initMap">
+"https://maps.googleapis.com/maps/api/js?key=<%= process.env.KEY %>&libraries=places&v=3&callback=initMap">
 </script>
 <% include ../partials/footer.ejs %>

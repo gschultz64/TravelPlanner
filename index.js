@@ -3,14 +3,11 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var db = require('./models');
 var flash = require('connect-flash');
-var rowdy = require('rowdy-logger');
 var session = require('express-session');
 var passport = require('./config/passportConfig');
 var isLoggedIn = require('./middleware/isLoggedIn');
 
 var app = express();
-
-rowdy.begin(app);
 
 app.set('view engine', 'ejs');
 

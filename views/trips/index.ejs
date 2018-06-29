@@ -5,9 +5,9 @@
 
     <ul>
       <% trips.forEach(function(trip) { %>
-        <li>
-        <% trip.name %>
-        </li>
+        <li><a href="/trips/<%=trip.name%>">
+        <%= trip.name %>
+        </a><a href="/trips/<%=trip.name%>" class="btn waves-effect red darken-4 delete">DELETE TRIP</a></li>
       <% }); %>
     </ul>
   </div>

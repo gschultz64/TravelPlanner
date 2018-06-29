@@ -26,7 +26,7 @@ router.get('/new', function (req, res) {
 router.get('/:name', function(req, res) {
   db.trip.find({
     where: {name: req.params.name},
-    // include: []
+    // include: [db.location]
   }).then(function(trip) {
     if (!trip) throw Error();
     res.render('trips/show', {trip: trip});
@@ -52,7 +52,19 @@ router.post('/', function(req,res) {
 // GET - /trips/update - display form to update a trip's details and/or add locations
 
 
-//POST - /trips - update a trip (locations and/or trip details)
+//PUT - /trips - update a trip (locations and/or trip details)
+
+//DELETE - /trips/:name - delete a trip 
+router.delete('/:name', function(req, res) {
+  db.trip.destroy({
+    where: {name: req.params.name}
+  }).then(function(data) {
+    console.log(data);
+    res.sendStatus(200);
+  });
+});
+
+//DELETE - /trips/:name - delete a location from a trip
 
 
 
