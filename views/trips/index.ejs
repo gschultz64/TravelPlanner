@@ -1,13 +1,16 @@
 <% include ../partials/header.ejs %>
+<main>
+  <div class="container">
+    <h2>Saved Trips</h2>
 
-<h2>Saved Trips</h2>
-
-<ul>
-  <% trips.forEach(function(trip) { %>
-    <li>
-    <% trip.name %>
-    </li>
-  <% }); %>
-</ul>
+    <ul>
+      <% trips.forEach(function(trip) { %>
+        <li>
+        <% trip.name %>
+        </li>
+      <% }); %>
+    </ul>
+  </div>
+</main>
 
 <% include ../partials/footer.ejs %>

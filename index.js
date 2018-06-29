@@ -42,9 +42,6 @@ app.get('/', function (req, res) {
   res.render('index');
 });
 
-app.get('/maps', function(req, res) {
-  res.render('maps/index');
-})
 
 app.use('/auth', require('./controllers/auth'));
 app.use('/trips', require('./controllers/trips'));

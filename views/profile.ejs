@@ -1,43 +1,45 @@
 <% include ./partials/header.ejs %>
-
-<h1 class="center">User Dashboard</h1>
-<div class="row">
-  <div class="col s12 m4 center">
-    <a href="/trips"><h2>Saved Trips</h2></a>
-    <ul>
-      <% trips.forEach(function(trip) { %>
-        <li>
-        <% trip.name %>
-        </li>
-      <% }); %>
-    </ul>
-  </div>
-  <div class="col s12 m4 center">
-    <h2>Account</h2>
-    <a href="#"><p>Change Password</p></a>
-    <a href="#"><p>Profile Picture</p></a>
-    <a href="#"><p>Profile Details</p></a>
-  </div>
-  <div class="col s12 m4 center">
-    <a href="/trips/new"><h2>New Trip</h2></a>
-    <form action="/trips" method="GET">
-      <div class="input-field">
-        <input type="search" id="search" required />
-        <label class="label-icon" for="search"></label><i class="material-icons">search</i>
+<main>
+  <div class="container">
+    <h1 class="center">User Dashboard</h1>
+    <div class="row">
+      <div class="col s12 m4 center">
+        <a href="/trips"><h2>Saved Trips</h2></a>
+        <ul>
+          <% trips.forEach(function(trip) { %>
+            <li>
+            <% trip.name %>
+            </li>
+          <% }); %>
+        </ul>
       </div>
-    </form>
-    <a href="/trips/new"><p>Create New Trip</p></a>
-  </div>
-</div>
-<div class="row">
-  <div class="col s12 center">
-    <h3>Calendar</h3>
-    <div class="calendar">
-      <i class="large material-icons">date_range</i>
+      <div class="col s12 m4 center">
+        <h2>Account</h2>
+        <a href="#"><p>Change Password</p></a>
+        <a href="#"><p>Profile Picture</p></a>
+        <a href="#"><p>Profile Details</p></a>
+      </div>
+      <div class="col s12 m4 center">
+        <a href="/trips/new"><h2>New Trip</h2></a>
+        <form action="/trips" method="GET">
+          <div class="input-field">
+            <input type="search" id="search" required />
+            <label class="label-icon" for="search"></label><i class="material-icons">search</i>
+          </div>
+        </form>
+        <a href="/trips/new"><p>Create New Trip</p></a>
+      </div>
     </div>
+    <div class="row">
+      <div class="col s12 center">
+        <h3>Calendar</h3>
+        <div class="calendar">
+          <i class="large material-icons">date_range</i>
+        </div>
+      </div>
+    </div>
+
+
   </div>
-</div>
-
-
-
+</main>
 <% include ./partials/footer.ejs %>

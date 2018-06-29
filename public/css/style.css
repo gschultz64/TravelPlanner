@@ -1,16 +1,15 @@
 body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 
-  main {
-    flex: 1 0 auto;
-  }
+main {
+  flex: 1 0 auto;
+}
 
 .container {
   width: 80%;
-  /* margin-top: 5%; */
 }
 
 .home {
@@ -55,8 +54,8 @@ p {
   margin-bottom: 0;
 }
 
-.end-date {
-  margin-left: 1em;
+.form {
+  margin-top: 1em;
 }
 
 .row {
@@ -75,11 +74,11 @@ hr {
   border: none;
 } 
 #map {
-  bottom:0px;
+  /* bottom:0px; */
   height: 100%;
-  left: 362px;
+  left: 10em;
   position: absolute;
-  right: 0px;
+  right: 10em;
 } 
 .options-box {
   background: #fff;
@@ -88,24 +87,23 @@ hr {
   height: 100%;
   line-height: 35px;
   padding: 10px 10px 30px 10px;
-  text-align: left;
-  width: 340px;
+  text-align: center;
+  margin-top: 1em;
 }
 #pano {
   width: 200px;
   height: 200px;
 }
 .text {
-  font-size: 12px;
+  padding: 1em;
 }
 #toggle-drawing {
-  width: 27%;
   position: relative;
-  margin-left: 10px;
 }
  #zoom-to-area-text {
   position: relative;
   width: 70%;
+  padding: .5em;
 }
 #zoom-to-area {
   width: 24%;
