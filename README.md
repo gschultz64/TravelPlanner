@@ -19,10 +19,13 @@ Completed wire frames and prototyping in Adobe XD - https://xd.adobe.com/view/09
 Planned site structure a bit more, which helped me realize I could combine some pages from my wire frames. Worked on some routes, wrote model associations, added more styling to site layout. Decided not to use express-ejs-layouts, doing header and footer in the partials folder so I can be more flexible with the site layout.
 
 # Day Four
-TODO: Finish routes, work on storing api data
+Google maps api is functioning on trips/new page (add new trip), using places, geometry and drawing tools. Can create a new trip and store to database.
+Realized I need to have a user id on the trip model, so I removed the association b/t trip and user until I get that implemented.
 
 # Day Five
 TODO: Finish stuff! Stretch features?
+- Use google api place photo for landing page?
+maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=idfromplace_idobject&key=<%process.env.KEY%>
 
 # Weekend (Days Six/Seven)
 TODO: Style the site more, finish whatever is left, work on stretch features

@@ -5,11 +5,11 @@ var session = require('express-session');
 var passport = require('./config/passportConfig');
 var isLoggedIn = require('./middleware/isLoggedIn');
 var flash = require('connect-flash');
-var geocoder = require('geocoder');
+var rowdy = require('rowdy-logger');
 var db = require('./models');
 
 var app = express();
-
+rowdy.begin(app);
 app.set('view engine', 'ejs');
 
 app.use(require('morgan')('dev'));
