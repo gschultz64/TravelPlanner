@@ -404,7 +404,9 @@
               innerHTML += '<br><br><img src="' + place.photos[0].getUrl(
                   {maxHeight: 100, maxWidth: 200}) + '">';
             }
-            innerHTML += '<br/><input class="btn" type="button" value="Add to Trip"/>'
+            // Form and button to add location data to locations table
+            // Need location name, address, place_id, lat, lng
+            innerHTML += '<br/><form action="/" method="POST"><input class="btn purple" type="submit" value="Add to Trip"/>'
             innerHTML += '</div>';
             infowindow.setContent(innerHTML);
             infowindow.open(map, marker);
