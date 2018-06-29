@@ -36,12 +36,21 @@ router.get('/:name', function(req, res) {
   });
 });
 
+// GET - /trips/edit - display form to update a trip's details and/or add locations
+router.get('/:name/edit', function (req, res) {
+  res.render('trips/edit');
+});
+
 // POST - /trips - add a new trip
 router.post('/', function(req,res) {
-  db.trip.create({
-    name: req.body.name,
-    startDate: req.body.startDate,
-    endDate: req.body.endDate
+  db.trip.findOrCreate({
+    where: {
+      name: req.body.name,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate
+    }
+  }).spread(function(trip) {
+    res.redirect('/');
   }).catch(function (error) {
     console.log(error);
     res.status(400).render('404');
@@ -49,10 +58,7 @@ router.post('/', function(req,res) {
 });
 
 
-// GET - /trips/update - display form to update a trip's details and/or add locations
-
-
-//PUT - /trips - update a trip (locations and/or trip details)
+//PUT - /trips/:name - update a trip (locations and/or trip details)
 
 //DELETE - /trips/:name - delete a trip 
 router.delete('/:name', function(req, res) {
