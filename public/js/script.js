@@ -1,5 +1,6 @@
 $(document).ready(function() {
   console.log("Hey friend!");
+  M.AutoInit();
   $('.sidenav').sidenav();
   $('.datepicker').datepicker({
     autoClose: true,
