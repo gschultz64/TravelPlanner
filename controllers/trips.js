@@ -22,11 +22,11 @@ router.get('/new', function (req, res) {
   });
 });
 
-// GET - /trips/:name - display a specific trip and its locations
-router.get('/:name', function(req, res) {
+// GET - /trips/:id - display a specific trip and its locations
+router.get('/:id', function(req, res) {
   db.trip.find({
-    where: {name: req.params.name},
-    // include: [db.location]
+    where: {id: req.params.id},
+    include: [db.location]
   }).then(function(trip) {
     if (!trip) throw Error();
     res.render('trips/show', {trip: trip});
@@ -36,24 +36,24 @@ router.get('/:name', function(req, res) {
   });
 });
 
-// GET - /trips/:name/edit - display form to update a trip's details and/or add locations
-router.get('/:name/edit', function (req, res) {
+// GET - /trips/:id/edit - display form to update a trip's details and/or add locations
+router.get('/:id/edit', function (req, res) {
   db.trip.find({
-    where: {name: req.params.name}
+    where: {id: req.params.id}
   }).then(function(data) {
   res.render('trips/edit', {trip: data});
   });
 });
 
-//PUT - /trips/:name - update a trip (locations and/or trip details)
-router.put('/:name/', function(req,res) {
-  console.log("put /:name/ " + JSON.stringify(req.body));
+//PUT - /trips/:id - update a trip (locations and/or trip details)
+router.put('/:id/', function(req,res) {
+  console.log("put /:id/ " + JSON.stringify(req.body));
   db.trip.update({
     name: req.params.name,
     startDate: req.params.startDate,
     endDate: req.params.endDate
   }, {
-    where: {name: req.params.name}
+    where: {id: req.params.id}
   }).then(function(data) {
     res.sendStatus(200);
   });
@@ -79,17 +79,17 @@ router.post('/', function(req,res) {
 // 
 
 
-//DELETE - /trips/:name - delete a trip 
-router.delete('/:name', function(req, res) {
+//DELETE - /trips/:id - delete a trip 
+router.delete('/:id', function(req, res) {
   db.trip.destroy({
-    where: {name: req.params.name}
+    where: {id: req.params.id}
   }).then(function(data) {
     console.log(data);
     res.sendStatus(200);
   });
 });
 
-//DELETE - /trips/:name - delete a location from a trip
+//DELETE - /trips/:id - delete a location from a trip
 
 
 

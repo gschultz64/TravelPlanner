@@ -7,7 +7,7 @@
         <a href="/trips"><h2>Saved Trips</h2></a>
         <ul>
           <% trips.forEach(function(trip) { %>
-            <li><a href="/trips/<%=trip.name%>">
+            <li><a href="/trips/<%=trip.id%>">
             <%= trip.name %>
             </a></li>
           <% }); %>

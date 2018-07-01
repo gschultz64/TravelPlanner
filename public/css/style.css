@@ -50,9 +50,9 @@ main {
   padding: 0;
 }
 
-p {
+/* p {
   margin-bottom: 0;
-}
+} */
 
 .form {
   margin-top: 1em;
@@ -60,6 +60,14 @@ p {
 
 .row {
   margin: 1% auto;
+}
+
+.trip {
+  display: inline-block;
+}
+
+.yellow.darken-2 {
+  margin: -2em 0 0 2em;
 }
 
 /* google maps styling */

@@ -3,8 +3,7 @@
   <div class="container"> 
     <div class="row">
       <div class="col s12 m6">
-        <h2><%= trip.name %></h2><a href="/trips/<%=trip.name%>/edit" class="btn waves-effect yellow darken-2"><i class="material-icons left">edit</i>Make Changes</a>
-        <p>This is a trip</p>
+        <h2 class="trip"><%= trip.name %></h2><a href="/trips/<%=trip.id%>/edit" class="btn waves-effect yellow darken-2"><i class="material-icons left">edit</i>Make Changes</a>
         <p>Your trip is scheduled for <strong><%=trip.startDate%></strong> through <strong><%=trip.endDate%></strong> </p>
       </div>
       <div class="col s12 offset-m1 m5">
@@ -14,12 +13,7 @@
             <input id="zoom-to-area-text" type="text" placeholder="Enter your favorite area!"/>
             <input id="zoom-to-area" class="btn" type="button" value="Zoom"/>
           </div>
-          <hr>
-          <div>
-            <span class="text">Search for more places to add:</span>
-            <input id="places-search" type="text" placeholder="Ex: Eiffel Tower"/>
-            <input id="go-places" class="btn" type="button" value="Go"/>
-          </div>
+          
         </div>
       </div>
     </div>
@@ -31,17 +25,46 @@
 // Add map to view all saved locations!!!
 var map;
 var markers;
-var placeMarkers = [];
-
-// Locations array to hold locations from location table (joined with trip)
-var locations = [];
 
 function initMap(){
+  // Locations array to hold locations from location table (joined with trip)
+  var locations = [
+    
+  ];
+  // $.get()
   // Style the markers a bit. This will be our listing marker icon.
   var defaultIcon = makeMarkerIcon('663399');
   // Create a "highlighted location" marker color for when the user
   // mouses over the marker.
   var highlightedIcon = makeMarkerIcon('00e2e2');
+
+  for (var i = 0; i < locations.length; i++) {
+    // Get the position from the location array.
+    var position = locations[i].location;
+    var title = locations[i].title;
+    // Create a marker per location, and put into markers array.
+    var marker = new google.maps.Marker({
+      position: position,
+      title: title,
+      animation: google.maps.Animation.DROP,
+      icon: defaultIcon,
+      id: i
+    });
+    // Push the marker to our array of markers.
+    markers.push(marker);
+    // Create an onclick event to open an infowindow at each marker.
+    marker.addListener('click', function() {
+      populateInfoWindow(this, largeInfowindow);
+    });
+    // Two event listeners - one for mouseover, one for mouseout,
+    // to change the colors back and forth.
+    marker.addListener('mouseover', function() {
+      this.setIcon(highlightedIcon);
+    });
+    marker.addListener('mouseout', function() {
+      this.setIcon(defaultIcon);
+    });
+  }
 
   // Constructor creates a new map - only center and zoom are required
   map = new google.maps.Map(document.getElementById('map'), {
@@ -50,19 +73,11 @@ function initMap(){
     mapTypeControl: false
   });
 
-  // Autocomplete search in time entry box
-  // var timeAutocomplete = new google.maps.places.Autocomplete(
-  //   document.getElementById('search-within-time-text'));
   // Autocomplete search in geocoder entry box
   var zoomAutocomplete = new google.maps.places.Autocomplete(
     document.getElementById('zoom-to-area-text'));
   // Bias the boundaries within the map for the zoom to area text.
   zoomAutocomplete.bindTo('bounds', map);
-  // Search box to execute a places search
-  var searchBox = new google.maps.places.SearchBox(
-    document.getElementById('places-search'));
-  // Bias the search box to within the bounds of the map
-  searchBox.setBounds(map.getBounds());
 
   var largeInfoWindow = new google.maps.InfoWindow();
 
@@ -70,15 +85,52 @@ function initMap(){
   document.getElementById('zoom-to-area').addEventListener('click', function() {
     zoomToArea();
   });
-
-  // Listen for the event fired when the user selects a prediction and clicks "Go" or hits the "enter" key
-  document.getElementById('go-places').addEventListener('click', textSearchPlaces);
-  document.getElementById('go-places').addEventListener('keyup', function(e) {
-    if (e.keycode === 13) {
-      textSearchPlaces;
-    }
-  });
 }
+
+// This function populates the infowindow when the marker is clicked. We'll only allow
+// one infowindow which will open at the marker that is clicked, and populate based
+// on that markers position.
+function populateInfoWindow(marker, infowindow) {
+  // Check to make sure the infowindow is not already opened on this marker.
+  if (infowindow.marker != marker) {
+    infowindow.setContent('');
+    infowindow.marker = marker;
+    // Make sure the marker property is cleared if the infowindow is closed.
+    infowindow.addListener('closeclick',function(){
+        infowindow.setMarker = null;
+    });
+    var streetViewService = new google.maps.StreetViewService();
+    var radius = 50;
+    // In case the status is OK, which means the pano was found, compute the
+    // position of the streetview image, then calculate the heading, then get a
+    // panorama from that and set the options
+    function getStreetView(data, status) {
+      if (status == google.maps.StreetViewStatus.OK) {
+        var nearStreetViewLocation = data.location.latLng;
+        var heading = google.maps.geometry.spherical.computeHeading(
+          nearStreetViewLocation, marker.position);
+        infowindow.setContent('<div>' + marker.title + '</div><div id="pano"></div>');
+        var panoramaOptions = {
+          position: nearStreetViewLocation,
+          pov: {
+            heading: heading,
+            pitch: 30
+          }
+        };
+        var panorama = new google.maps.StreetViewPanorama(
+          document.getElementById('pano'), panoramaOptions);
+      } else {
+        infowindow.setContent('<div>' + marker.title + '</div>' +
+          '<div>No Street View Found</div>');
+      };
+    };
+    // Use streetview service to get the closest streetview image within
+    // 50 meters of the markers position
+    streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
+    // Open the infowindow on the correct marker.
+    infowindow.open(map, marker);
+  };
+};   
 
 // This function takes in a COLOR, and then creates a new marker
 // icon of that color. The icon will be 21 px wide by 34 high, have an origin
@@ -106,11 +158,11 @@ function showListings() {
 };
 
 // This function will loop through the listings and hide them all.
-  function hideMarkers(markers) {
-    for (var i = 0; i < markers.length; i++) {
-      markers[i].setMap(null);
-    };
+function hideMarkers(markers) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(null);
   };
+};
 
 // This function takes the input value in the find nearby area text input
 // locates it, and then zooms into that area. This is so that the user can
@@ -139,114 +191,6 @@ function zoomToArea() {
         }
       });
   }
-}
-
-// This function fires when the user selects "go" on the places search.
-// It will do a nearby search using the entered query string or place.
-function textSearchPlaces() {
-  var bounds = map.getBounds();
-  hideMarkers(placeMarkers);
-  var placesService = new google.maps.places.PlacesService(map);
-  placesService.textSearch({
-    query: document.getElementById('places-search').value,
-    bounds: bounds
-  }, function(results, status) {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-      createMarkersForPlaces(results);
-    };
-  });
-};
-
-// This function creates markers for each place found in either places search.
-function createMarkersForPlaces(places) {
-  var bounds = new google.maps.LatLngBounds();
-  for (var i = 0; i < places.length; i++) {
-    var place = places[i];
-    var icon = {
-      url: place.icon,
-      size: new google.maps.Size(35,35),
-      origin: new google.maps.Point(0,0),
-      anchor: new google.maps.Point(15,34),
-      scaledSize: new google.maps.Size(25,25)
-    };
-    // Create a marker for each place
-    var marker = new google.maps.Marker({
-      map: map,
-      position: place.geometry.location,
-      title: place.name,
-      animation: google.maps.Animation.DROP,
-      icon: icon,
-      id: place.place_id
-    });
-    // Create a single infowindow to be used with the place details information
-    // so that only one is open at once.
-    var placeInfoWindow = new google.maps.InfoWindow();
-    // If a marker is clicked, do a place details search on it in the next function.
-    marker.addListener('click', function() {
-      if (placeInfoWindow.marker == this) {
-        console.log("This infowindow already is on this marker!");
-      } else {
-        getPlacesDetails(this, placeInfoWindow);
-      }
-    });
-    placeMarkers.push(marker);
-    if(place.geometry.viewport) {
-      // Only geocodes have viewport
-      bounds.union(place.geometry.viewport);
-    } else {
-      bounds.extend(place.geometry.location);
-    };
-  };
-  map.fitBounds(bounds);
-};
-
-// This is the PLACE DETAILS search - it's the most detailed so it's only
-// executed when a marker is selected, indicating the user wants more
-// details about that place.
-function getPlacesDetails(marker, infowindow) {
-  var service = new google.maps.places.PlacesService(map);
-  service.getDetails({
-    placeId: marker.id
-  }, function(place, status) {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-      // Set the marker property on this infowindow so it isn't created again.
-      infowindow.marker = marker;
-      var innerHTML = '<div>';
-      if (place.name) {
-        innerHTML += '<strong>' + place.name + '</strong>';
-      }
-      if (place.formatted_address) {
-        innerHTML += '<br>' + place.formatted_address;
-      }
-      if (place.formatted_phone_number) {
-        innerHTML += '<br>' + place.formatted_phone_number;
-      }
-      if (place.opening_hours) {
-        innerHTML += '<br><br><strong>Hours:</strong><br>' +
-            place.opening_hours.weekday_text[0] + '<br>' +
-            place.opening_hours.weekday_text[1] + '<br>' +
-            place.opening_hours.weekday_text[2] + '<br>' +
-            place.opening_hours.weekday_text[3] + '<br>' +
-            place.opening_hours.weekday_text[4] + '<br>' +
-            place.opening_hours.weekday_text[5] + '<br>' +
-            place.opening_hours.weekday_text[6];
-      }
-      if (place.photos) {
-        innerHTML += '<br><br><img src="' + place.photos[0].getUrl(
-            {maxHeight: 100, maxWidth: 200}) + '">';
-      }
-      // Form and button to add location data to locations table
-      // Need location name, address, place_id, lat, lng
-      innerHTML += '<br/><form action="/trips/<%= trip.name%>" method="POST"><input class="btn purple" type="submit" value="Add to Trip"/></form>'
-      innerHTML += '</div>';
-      infowindow.setContent(innerHTML);
-      infowindow.open(map, marker);
-      // Make sure the marker property is cleared if the infowindow is closed.
-      infowindow.addListener('closeclick', function() {
-        infowindow.marker = null;
-      });
-    }
-  });
 }
 
 </script>
