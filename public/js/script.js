@@ -16,6 +16,24 @@ $(document).ready(function() {
   //   showClearBtn: true,
   //   defaultDate: date
   // });
+  $('.edit-form').on('submit', function(e) {
+    e.preventDefault();
+    console.log("edit-form submit" + JSON.stringify($(this).serialize))
+    // var name = req.body.name;
+
+    var newData = $(this).serialize;    
+    var url = $(this).attr('action');
+    
+    
+    $.ajax({
+      method: 'PUT',
+      data: newData,
+      url: url
+    }).done(function(data) {
+      //window.location = '/trips'
+    });
+  });
+
 
   $('a.delete').on('click', function(e) {
     e.preventDefault();

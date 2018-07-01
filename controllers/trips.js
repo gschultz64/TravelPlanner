@@ -4,7 +4,7 @@ var isLoggedIn = require('../middleware/isLoggedIn');
 var router = express.Router();
 
 // GET - /trips - display all saved trips
-router.get('/', isLoggedIn, function (req, res) {
+router.get('/', function (req, res) {
   db.trip.findAll().then(function (trips) {
     res.render('trips/index', { trips: trips });
   }).catch(function (error) {
@@ -22,7 +22,7 @@ router.get('/new', function (req, res) {
   });
 });
 
-// GET - /trips/:name - display a specific trip
+// GET - /trips/:name - display a specific trip and its locations
 router.get('/:name', function(req, res) {
   db.trip.find({
     where: {name: req.params.name},
@@ -36,10 +36,29 @@ router.get('/:name', function(req, res) {
   });
 });
 
-// GET - /trips/edit - display form to update a trip's details and/or add locations
+// GET - /trips/:name/edit - display form to update a trip's details and/or add locations
 router.get('/:name/edit', function (req, res) {
-  res.render('trips/edit');
+  db.trip.find({
+    where: {name: req.params.name}
+  }).then(function(data) {
+  res.render('trips/edit', {trip: data});
+  });
 });
+
+//PUT - /trips/:name - update a trip (locations and/or trip details)
+router.put('/:name/', function(req,res) {
+  console.log("put /:name/ " + JSON.stringify(req.body));
+  db.trip.update({
+    name: req.params.name,
+    startDate: req.params.startDate,
+    endDate: req.params.endDate
+  }, {
+    where: {name: req.params.name}
+  }).then(function(data) {
+    res.sendStatus(200);
+  });
+});
+
 
 // POST - /trips - add a new trip
 router.post('/', function(req,res) {
@@ -50,15 +69,15 @@ router.post('/', function(req,res) {
       endDate: req.body.endDate
     }
   }).spread(function(trip) {
-    res.redirect('/');
+    res.redirect('/trips');
   }).catch(function (error) {
     console.log(error);
     res.status(400).render('404');
   });
 });
 
+// 
 
-//PUT - /trips/:name - update a trip (locations and/or trip details)
 
 //DELETE - /trips/:name - delete a trip 
 router.delete('/:name', function(req, res) {

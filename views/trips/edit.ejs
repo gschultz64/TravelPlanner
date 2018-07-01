@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col s12 m5 form">
-        <form action="/trips/<%= trip.name %>" method="POST">
+        <form class="edit-form" action="/trips/<%= trip.name %>" method="POST">
           <div class="input-field">
             <label for="tripName">Name</label>
             <input id="tripName" class="form-control" type="text" value="<%= trip.name %>" name="name">
@@ -17,7 +17,7 @@
             <input id="endDate" class="datepicker input-field" type="datepicker" value="<%= trip.endDate %>" name="endDate">
           </div>
           <br/>
-          <button class="btn purple" type="submit"><i class="material-icons right"></i>Add Trip</button>
+          <button class="btn purple" type="submit"><i class="material-icons right"></i>Update Trip</button>
         </form>
       </div>
       <div class="col s12 offset-m1 m5">

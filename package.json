@@ -36,6 +36,7 @@
     "passport-local": "^1.0.0",
     "pg": "^6.4.2",
     "pg-hstore": "^2.3.2",
+    "rowdy-logger": "0.0.2",
     "sequelize": "^4.38.0"
   },
   "description": "Express app using Passport + flash messages + custom middleware",

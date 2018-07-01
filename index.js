@@ -6,8 +6,11 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('./config/passportConfig');
 var isLoggedIn = require('./middleware/isLoggedIn');
+var rowdy = require('rowdy-logger');
 
 var app = express();
+
+rowdy.begin(app);
 
 app.set('view engine', 'ejs');
 
@@ -46,6 +49,8 @@ app.use('/auth', require('./controllers/auth'));
 app.use('/trips', require('./controllers/trips'));
 app.use('/profile', require('./controllers/profile'));
 
-var server = app.listen(process.env.PORT || 3000);
+var server = app.listen(process.env.PORT || 3000, function() {
+  rowdy.print();
+});
 
 module.exports = server;
