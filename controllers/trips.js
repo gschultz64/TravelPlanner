@@ -1,6 +1,5 @@
 var express = require('express');
 var db = require('../models');
-var isLoggedIn = require('../middleware/isLoggedIn');
 var router = express.Router();
 
 // GET - /trips - display all saved trips
@@ -8,7 +7,6 @@ router.get('/', function (req, res) {
   db.trip.findAll().then(function (trips) {
     res.render('trips/index', { trips: trips });
   }).catch(function (error) {
-    console.log(error);
     res.status(400).render('404');
   });
 });
@@ -31,7 +29,6 @@ router.get('/:id', function (req, res) {
     if (!trip) throw Error();
     res.render('trips/show', { trip: trip });
   }).catch(function (error) {
-    console.log(error);
     res.status(400).render('404');
   });
 });
@@ -43,7 +40,6 @@ router.get('/:id/locations', function (req, res) {
   }).then(function (trip) {
     res.json(JSON.stringify(trip.locations))
   }).catch(function (error) {
-    console.log("/:id/locations error " + error)
     res.status(error).render('404')
   })
 })
@@ -82,7 +78,6 @@ router.post('/', function (req, res) {
   }).spread(function (trip, created) {
     res.redirect('/trips/' + trip.id);
   }).catch(function (error) {
-    console.log(error);
     res.status(400).render('404');
   });
 });
@@ -98,12 +93,10 @@ router.post('/:id', function (req, res) {
       }
     }).spread(function (location, created) {
       trip.addLocation(location).then(function (location) {
-        console.log(location + 'added to', trip);
         res.redirect('/trips/' + trip.id);
       });
     }); 
   }).catch(function(error){
-    console.log(error);
     res.status(400).render('404');
   });
 });
@@ -114,13 +107,9 @@ router.delete('/:id', function (req, res) {
   db.trip.destroy({
     where: { id: req.params.id }
   }).then(function (data) {
-    console.log(data);
     res.sendStatus(200);
   });
 });
-
-//DELETE - /trips/:id - delete a location from a trip
-
 
 
 module.exports = router;
