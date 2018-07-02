@@ -25,64 +25,70 @@ var map;
 var markers;
 function initMap(){
   // Locations array to hold locations from location table (joined with trip)
-  var locations = [
+  $.get("/trips/<%=trip.id%>/locations", function(locationsData, textStatus) {
     
-  ];
+    var locations = []
 
-  
-  // Style the markers a bit. This will be our listing marker icon.
-  var defaultIcon = makeMarkerIcon('663399');
-  // Create a "highlighted location" marker color for when the user
-  // mouses over the marker.
-  var highlightedIcon = makeMarkerIcon('00e2e2');
+    // Style the markers a bit. This will be our listing marker icon.
+    var defaultIcon = makeMarkerIcon('663399');
+    // Create a "highlighted location" marker color for when the user
+    // mouses over the marker.
+    var highlightedIcon = makeMarkerIcon('00e2e2');
 
-  for (var i = 0; i < locations.length; i++) {
-    // Get the position from the location array.
-    var position = locations[i].location;
-    var title = locations[i].title;
-    // Create a marker per location, and put into markers array.
-    var marker = new google.maps.Marker({
-      position: position,
-      title: title,
-      animation: google.maps.Animation.DROP,
-      icon: defaultIcon,
-      id: i
+    for (var i = 0; i < locations.length; i++) {
+      // Get the position from the location array.
+      var position = locations[i].location;
+      var title = locations[i].title;
+      // Create a marker per location, and put into markers array.
+      var marker = new google.maps.Marker({
+        position: position,
+        title: title,
+        animation: google.maps.Animation.DROP,
+        icon: defaultIcon,
+        id: i
+      });
+      // Push the marker to our array of markers.
+      markers.push(marker);
+      // Create an onclick event to open an infowindow at each marker.
+      marker.addListener('click', function() {
+        populateInfoWindow(this, largeInfowindow);
+      });
+      // Two event listeners - one for mouseover, one for mouseout,
+      // to change the colors back and forth.
+      marker.addListener('mouseover', function() {
+        this.setIcon(highlightedIcon);
+      });
+      marker.addListener('mouseout', function() {
+        this.setIcon(defaultIcon);
+      });
+    }
+
+    // Constructor creates a new map - only center and zoom are required
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 47.6076641, lng: -122.3355026},
+      zoom: 8,
+      mapTypeControl: false
     });
-    // Push the marker to our array of markers.
-    markers.push(marker);
-    // Create an onclick event to open an infowindow at each marker.
-    marker.addListener('click', function() {
-      populateInfoWindow(this, largeInfowindow);
+    var placesService = new google.maps.places.PlacesService(map);
+    placesService.getDetails({ placeId: "ChIJ6W3FzTRydkgRZ0H2Q1VT548"}, 
+      function(placeResult, placeServiceStatus) {
+        var location = placeResult.geometry.location
+        map.setCenter(location)
+    })
+
+    // Autocomplete search in geocoder entry box
+    var zoomAutocomplete = new google.maps.places.Autocomplete(
+      document.getElementById('zoom-to-area-text'));
+    // Bias the boundaries within the map for the zoom to area text.
+    zoomAutocomplete.bindTo('bounds', map);
+
+    var largeInfoWindow = new google.maps.InfoWindow();
+
+    // Zoom to Area button
+    document.getElementById('zoom-to-area').addEventListener('click', function() {
+      zoomToArea();
     });
-    // Two event listeners - one for mouseover, one for mouseout,
-    // to change the colors back and forth.
-    marker.addListener('mouseover', function() {
-      this.setIcon(highlightedIcon);
-    });
-    marker.addListener('mouseout', function() {
-      this.setIcon(defaultIcon);
-    });
-  }
-
-  // Constructor creates a new map - only center and zoom are required
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 47.6076641, lng: -122.3355026},
-    zoom: 8,
-    mapTypeControl: false
-  });
-
-  // Autocomplete search in geocoder entry box
-  var zoomAutocomplete = new google.maps.places.Autocomplete(
-    document.getElementById('zoom-to-area-text'));
-  // Bias the boundaries within the map for the zoom to area text.
-  zoomAutocomplete.bindTo('bounds', map);
-
-  var largeInfoWindow = new google.maps.InfoWindow();
-
-  // Zoom to Area button
-  document.getElementById('zoom-to-area').addEventListener('click', function() {
-    zoomToArea();
-  });
+  })
 }
 
 // This function populates the infowindow when the marker is clicked. We'll only allow

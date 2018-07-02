@@ -29,12 +29,24 @@ router.get('/:id', function (req, res) {
     include: [db.location]
   }).then(function (trip) {
     if (!trip) throw Error();
-    res.render('trips/show', { trip: trip, locations: locations });
+    res.render('trips/show', { trip: trip });
   }).catch(function (error) {
     console.log(error);
     res.status(400).render('404');
   });
 });
+
+router.get('/:id/locations', function (req, res) {
+  db.trip.find({
+    where: { id: req.params.id },
+    include: [db.location]
+  }).then(function (trip) {
+    res.json(JSON.stringify(trip.locations))
+  }).catch(function (error) {
+    console.log("/:id/locations error " + error)
+    res.status(error).render('404')
+  })
+})
 
 // GET - /trips/:id/edit - display form to update a trip's details and/or add locations
 router.get('/:id/edit', function (req, res) {
