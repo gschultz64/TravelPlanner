@@ -22,7 +22,7 @@
       </div>
       <div class="col s12 offset-m1 m5">
         <div class="options-box">
-          <h3>Find Locations for Your Trip!</h3>
+          <h3>Where do you want to go?</h3>
           <div>
             <input id="zoom-to-area-text" type="text" placeholder="Enter your favorite area!"/>
             <input id="zoom-to-area" class="btn" type="button" value="Zoom"/>
@@ -270,7 +270,7 @@
             }
             // Form and button to add location data to locations table
             // Need location name, address, place_id, lat, lng
-            innerHTML += '<br/><form action="/trips" method="POST"><input class="btn purple" type="submit" value="Add to Trip"/></form>'
+            innerHTML += '<br/>'
             innerHTML += '</div>';
             infowindow.setContent(innerHTML);
             infowindow.open(map, marker);

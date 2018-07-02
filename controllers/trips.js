@@ -54,6 +54,13 @@ router.put('/:id/', function(req,res) {
   }, {
     where: {id: req.params.id}
   }).then(function(data) {
+    db.location.findOrCreate({
+      where: { placeId: req.body.placeId }
+    }).spread(function (location, created) {
+      trip.addLocation(location).then(function (location) {
+        console.log(location + 'added to', trip);
+      });
+    });
     res.sendStatus(200);
   });
 });
@@ -61,14 +68,17 @@ router.put('/:id/', function(req,res) {
 
 // POST - /trips - add a new trip
 router.post('/', function(req,res) {
+  // var id = req.params.id;
   db.trip.findOrCreate({
     where: {
       name: req.body.name,
       startDate: req.body.startDate,
       endDate: req.body.endDate
     }
-  }).spread(function(trip) {
-    res.redirect('/trips');
+  }).spread(function(trip, created) {
+    console.log(JSON.stringify(trip));
+    
+    res.redirect('/trips/' + trip.id );
   }).catch(function (error) {
     console.log(error);
     res.status(400).render('404');
