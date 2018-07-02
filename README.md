@@ -1,9 +1,9 @@
-# project2 - "Travel Website"
+# Travel Planner
 
 ## Wire frames
-## White Board Photos
+### White Board Photos
 - Add photos here
-## Adobe XD Files
+### Adobe XD Files
 - Add wireframe file(s) here
 
 # Day One
