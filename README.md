@@ -21,21 +21,37 @@ Completed wire frames and prototyping in Adobe XD - https://xd.adobe.com/view/09
 Method │ Path                 |           
 -------------------------------
 GET    │ /                    |
+-------------------------------
 GET    │ /auth/signup         │
+-------------------------------
 GET    │ /auth/login          │
+-------------------------------
 POST   │ /auth/signup         │
+-------------------------------
 POST   │ /auth/login          │
+-------------------------------
 GET    │ /auth/logout         │
+-------------------------------
 GET    │ /trips               │
+-------------------------------
 GET    │ /trips/new           │
+-------------------------------
 GET    │ /trips/:id           │
+-------------------------------
 GET    │ /trips/:id/locations │
+-------------------------------
 GET    │ /trips/:id/edit      │
+-------------------------------
 PUT    │ /trips/:id           │
+-------------------------------
 POST   │ /trips               │
+-------------------------------
 POST   │ /trips/:id           │
+-------------------------------
 DELETE │ /trips/:id           │
+-------------------------------
 GET    │ /profile             │
+-------------------------------
 
 # Day Three
 Planned site structure a bit more, which helped me realize I could combine some pages from my wire frames. Worked on some routes, wrote model associations, added more styling to site layout. Decided not to use express-ejs-layouts, doing header and footer in the partials folder so I can be more flexible with the site layout.
