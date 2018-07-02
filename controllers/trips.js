@@ -47,11 +47,10 @@ router.get('/:id/edit', function (req, res) {
 
 //PUT - /trips/:id - update a trip (locations and/or trip details)
 router.put('/:id/', function(req,res) {
-  console.log("put /:id/ " + JSON.stringify(req.body));
   db.trip.update({
-    name: req.params.name,
-    startDate: req.params.startDate,
-    endDate: req.params.endDate
+    name: req.body.name,
+    startDate: req.body.startDate,
+    endDate: req.body.endDate
   }, {
     where: {id: req.params.id}
   }).then(function(data) {
@@ -75,8 +74,6 @@ router.post('/', function(req,res) {
     res.status(400).render('404');
   });
 });
-
-// 
 
 
 //DELETE - /trips/:id - delete a trip 

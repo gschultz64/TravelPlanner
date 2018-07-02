@@ -29,8 +29,8 @@
           </div>
           <hr>
           <div>
-            <span class="text">Search for nearby places</span>
-            <input id="places-search" type="text" placeholder="Ex: Eiffel Tower"/>
+            <span class="text">Search for nearby places:</span>
+            <input id="places-search" type="text" placeholder="Ex: Landmarks near New York City"/>
             <input id="go-places" class="btn" type="button" value="Go"/>
           </div>
         </div>
@@ -270,7 +270,7 @@
             }
             // Form and button to add location data to locations table
             // Need location name, address, place_id, lat, lng
-            innerHTML += '<br/><form action="/trips" method="POST"><input class="btn purple" type="submit" value="Add to Trip"/></form>'
+            innerHTML += '<br/><form action="/trips/<%= trip.id %>" method="POST"><input type="text" value="' + place.place_id + '" name="placeId" hidden/><input class="btn purple" type="submit" value="Add to Trip"/></form>'
             innerHTML += '</div>';
             infowindow.setContent(innerHTML);
             infowindow.open(map, marker);

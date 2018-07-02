@@ -18,22 +18,16 @@ $(document).ready(function() {
   // });
   $('.edit-form').on('submit', function(e) {
     e.preventDefault();
-    console.log("edit-form submit" + JSON.stringify($(this).serialize))
-    // var name = req.body.name;
-
-    var newData = $(this).serialize;    
+    var newData = $(this).serialize();    
     var url = $(this).attr('action');
-    
-    
     $.ajax({
       method: 'PUT',
       data: newData,
       url: url
-    }).done(function(data) {
-      //window.location = '/trips'
+    }).done(function() {
+      window.location = url
     });
   });
-
 
   $('a.delete').on('click', function(e) {
     e.preventDefault();
@@ -41,8 +35,7 @@ $(document).ready(function() {
     $.ajax({
       method: 'DELETE',
       url: url
-    }).done(function (data) {
-      console.log(data);
+    }).done(function () {
       window.location = '/trips';
     });
   });
