@@ -1,5 +1,14 @@
 # Travel Planner
 
+## https://genevievetravel.herokuapp.com/
+
+## Technologies
+- Materialize CSS and JS features
+- jQuery and Javascript
+- Google Maps APIs, Google Places library
+- Many:Many relationship between Trips and Locations
+- 1:Many relationship between User and Trips (incomplete)
+
 ## Wire frames
 ### White Board Photos
 - Add photos here
