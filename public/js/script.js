@@ -8,14 +8,6 @@ $(document).ready(function() {
     showDaysInNextAndPreviousMonths: true,
     showClearBtn: true
   });
-  // var date = $('#startDate').serialize;
-  // $('#endDate').datepicker({
-  //   autoClose: true,
-  //   setDefaultDate: true,
-  //   showDaysInNextAndPreviousMonths: true,
-  //   showClearBtn: true,
-  //   defaultDate: date
-  // });
   $('.edit-form').on('submit', function(e) {
     e.preventDefault();
     var newData = $(this).serialize();    
@@ -28,8 +20,6 @@ $(document).ready(function() {
       window.location = url
     });
   });
-  
-
   $('a.delete').on('click', function(e) {
     e.preventDefault();
     var url = $(this).attr('href');

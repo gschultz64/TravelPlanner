@@ -5,6 +5,13 @@
       <div class="col s12 m6">
         <h2 class="trip"><%= trip.name %></h2><a href="/trips/<%=trip.id%>/edit" class="btn waves-effect yellow darken-2"><i class="material-icons left">edit</i>Make Changes</a>
         <p>Your trip is scheduled for <strong><%=trip.startDate%></strong> through <strong><%=trip.endDate%></strong> </p>
+        <ul>
+          <% trip.locations.forEach(function(location) { %>
+          <li>
+          <strong><%= location.name %></strong> : <%= location.address %>
+          </li>
+          <% }); %>
+        </ul>
       </div>
       <div class="col s12 offset-m1 m5">
         <div class="options-box">
@@ -24,9 +31,10 @@
 var map;
 var markers;
 function initMap(){
-  // Locations array to hold locations from location table (joined with trip)
+  // Get locations from the location table to display on the map
   $.get("/trips/<%=trip.id%>/locations", function(locationsData, textStatus) {
-    
+
+  // Locations array to hold locations from location table (joined with trip)    
     var locations = []
 
     // Style the markers a bit. This will be our listing marker icon.
@@ -69,12 +77,13 @@ function initMap(){
       zoom: 8,
       mapTypeControl: false
     });
-    var placesService = new google.maps.places.PlacesService(map);
-    placesService.getDetails({ placeId: "ChIJ6W3FzTRydkgRZ0H2Q1VT548"}, 
-      function(placeResult, placeServiceStatus) {
-        var location = placeResult.geometry.location
-        map.setCenter(location)
-    })
+    // Query google maps api to get specific location based on placeId of location
+    // var placesService = new google.maps.places.PlacesService(map);
+    // placesService.getDetails({ placeId: "ChIJ6W3FzTRydkgRZ0H2Q1VT548"}, 
+    //   function(placeResult, placeServiceStatus) {
+    //     var location = placeResult.geometry.location
+    //     map.setCenter(location)
+    // })
 
     // Autocomplete search in geocoder entry box
     var zoomAutocomplete = new google.maps.places.Autocomplete(
@@ -88,7 +97,7 @@ function initMap(){
     document.getElementById('zoom-to-area').addEventListener('click', function() {
       zoomToArea();
     });
-  })
+  });
 }
 
 // This function populates the infowindow when the marker is clicked. We'll only allow
