@@ -18,39 +18,39 @@ Completed wire frames and prototyping in Adobe XD - https://xd.adobe.com/view/09
 
 # RESTful Routes
 
-Method │ Path                 |           
+### Method │ Path                 |           
 -------------------------------
-GET    │ /                    |
+### GET    │ /                    |
 -------------------------------
-GET    │ /auth/signup         │
+### GET    │ /auth/signup         │
 -------------------------------
-GET    │ /auth/login          │
+### GET    │ /auth/login          │
 -------------------------------
-POST   │ /auth/signup         │
+### POST   │ /auth/signup         │
 -------------------------------
-POST   │ /auth/login          │
+### POST   │ /auth/login          │
 -------------------------------
-GET    │ /auth/logout         │
+### GET    │ /auth/logout         │
 -------------------------------
-GET    │ /trips               │
+### GET    │ /trips               │
 -------------------------------
-GET    │ /trips/new           │
+### GET    │ /trips/new           │
 -------------------------------
-GET    │ /trips/:id           │
+### GET    │ /trips/:id           │
 -------------------------------
-GET    │ /trips/:id/locations │
+### GET    │ /trips/:id/locations │
 -------------------------------
-GET    │ /trips/:id/edit      │
+### GET    │ /trips/:id/edit      │
 -------------------------------
-PUT    │ /trips/:id           │
+### PUT    │ /trips/:id           │
 -------------------------------
-POST   │ /trips               │
+### POST   │ /trips               │
 -------------------------------
-POST   │ /trips/:id           │
+### POST   │ /trips/:id           │
 -------------------------------
-DELETE │ /trips/:id           │
+### DELETE │ /trips/:id           │
 -------------------------------
-GET    │ /profile             │
+### GET    │ /profile             │
 -------------------------------
 
 # Day Three
