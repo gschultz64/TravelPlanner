@@ -50,9 +50,9 @@ main {
   padding: 0;
 }
 
-/* p {
-  margin-bottom: 0;
-} */
+.btn {
+  margin: .5em;
+}
 
 .form {
   margin-top: 1em;

@@ -28,6 +28,7 @@ $(document).ready(function() {
       window.location = url
     });
   });
+  
 
   $('a.delete').on('click', function(e) {
     e.preventDefault();

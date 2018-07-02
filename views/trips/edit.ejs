@@ -270,7 +270,7 @@
             }
             // Form and button to add location data to locations table
             // Need location name, address, place_id, lat, lng
-            innerHTML += '<br/><form action="/trips/<%= trip.id %>" method="POST"><input type="text" value="' + place.place_id + '" name="placeId" hidden/><input class="btn purple" type="submit" value="Add to Trip"/></form>'
+            innerHTML += '<br/><form class="add-location" action="/trips/<%= trip.id %>" method="POST"><input type="text" value="' + place.place_id + '" name="placeId" hidden/><input type="text" value="' + place.formatted_address + '" name="address" hidden/><input type="text" value="' + place.name + '" name="placeName" hidden/><input class="btn purple" type="submit" value="Add to Trip"/></form>'
             innerHTML += '</div>';
             infowindow.setContent(innerHTML);
             infowindow.open(map, marker);
