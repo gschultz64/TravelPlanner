@@ -2,8 +2,9 @@
 
 ## Wire frames
 ## White Board Photos
-
+- Add photos here
 ## Adobe XD Files
+- Add wireframe file(s) here
 
 # Day One
 Researched and studied using the Google Maps API(s) - https://classroom.udacity.com/courses/ud864
@@ -23,9 +24,15 @@ Google maps api is functioning on trips/new page (add new trip), using places, g
 Realized I need to have a user id on the trip model, so I removed the association b/t trip and user until I get that implemented.
 
 # Day Five
-TODO: Finish stuff! Stretch features?
-- Use google api place photo for landing page?
-maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=idfromplace_idobject&key=<%process.env.KEY%>
+Worked more on using the google maps api places library, so the user can search for a specific place or a group of places in a certain area. Saved trips all display properly and can be deleted. I wanted to be at MVP by the end of Friday, but wasn't able to get there.
 
 # Weekend (Days Six/Seven)
-TODO: Style the site more, finish whatever is left, work on stretch features
+I was hoping to be able to do more styling and add more features to the site over the weekend, but was still getting the site to MVP on Saturday and Sunday. I actually ran into problems on Sunday when trying to re-do a couple of my models with Sequelize. This ate up a lot of time and threw off my plan for what I could complete. Deploying to Heroku was also giving me trouble, so I have yet to finish that aspect of the project. 
+
+# What I Want to Do
+- Finish deploying the site on Heroku
+- Improve the session
+- Finish styling the site
+- Get randomly generated photos for the landing page instead of kittens.
+- Use the dates provided on a trip to generate a calendar of all upcoming trips
+- Add account features: like changing password, adding/changing/removing a profile picture, being able to view other users' trips and profile
