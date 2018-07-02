@@ -64,10 +64,9 @@ Realized I need to have a user id on the trip model, so I removed the associatio
 Worked more on using the google maps api places library, so the user can search for a specific place or a group of places in a certain area. Saved trips all display properly and can be deleted. I wanted to be at MVP by the end of Friday, but wasn't able to get there.
 
 # Weekend (Days Six/Seven)
-I was hoping to be able to do more styling and add more features to the site over the weekend, but was still getting the site to MVP on Saturday and Sunday. I actually ran into problems on Sunday when trying to re-do a couple of my models with Sequelize. This ate up a lot of time and threw off my plan for what I could complete. Deploying to Heroku was also giving me trouble, so I have yet to finish that aspect of the project. 
+I was hoping to be able to do more styling and add more features to the site over the weekend, but was still getting the site to MVP on Saturday and Sunday. I actually ran into problems on Sunday when trying to re-do a couple of my models with Sequelize. This ate up a lot of time and threw off my plan for what I could complete. 
 
 # What I Want to Do
-- Finish deploying the site on Heroku
 - Improve the session
 - Finish styling the site
 - Get randomly generated photos for the landing page instead of kittens.
