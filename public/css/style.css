@@ -2,6 +2,24 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  background-image: url('../img/full-bloom-color.png');
+  /* Background pattern from https://www.toptal.com/designers/subtlepatterns */
+}
+
+a.brand-logo {
+  margin-left: .5em; 
+} 
+
+a {
+  color: #546e7a;
+}
+
+a:hover {
+  color: #b0bec5;
+}
+
+h1 {
+  margin-top: 2rem;
 }
 
 main {
@@ -13,18 +31,15 @@ main {
 }
 
 .home {
-  background-color: #D0D7D9;
-  padding: 2rem 0;
-  margin-top: 1rem;
+  padding: .5rem 0;
 }
 
 .home a {
   margin: 1rem;
 }
 
-.photos {
-  background-color: #D0D7D9;
-  padding: 5%;
+form {
+  margin-top: 2em;
 }
 
 .footer-list {
@@ -66,9 +81,16 @@ main {
   display: inline-block;
 }
 
-.yellow.darken-2 {
+.yellow.lighten-2 {
   margin: -2em 0 0 2em;
+  color: black;
 }
+
+.alert {
+  margin: 2em;
+  max-width: 20%;
+}
+
 
 /* google maps styling */
 #hide-listings,
